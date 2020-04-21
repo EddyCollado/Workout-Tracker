@@ -19,8 +19,8 @@ module.exports = function(app) {
         }
         catch(err) {
             console.log("error occured creating a workout: ", err)
-        };
-    });
+        }
+    })
 
     app.put("/api/workouts/:id", ({ body, params }, res) => {
         const workoutId = params.id;
@@ -32,13 +32,14 @@ module.exports = function(app) {
             res.json(dbWorkout[0].exercises);
             let allExercises = [...savedExercises, body]
             console.log(allExercises)
+            updateWorkout(allExercises)
         })
         .catch(err => {
             res.json(err);
         });
 
         function updateWorkout(exercises) {
-            db.Workout.findByIdAndUpdate( workoutId, { exercises: excersises }, function (err, doc) {
+            db.Workout.findByIdAndUpdate( workoutId, { exercises: exercises }, function (err, doc) {
                 if (err) {
                     console.log(err)
                 }
@@ -46,7 +47,7 @@ module.exports = function(app) {
         };
     });
 
-    app.get("/api/workout/range", (rew, res) => {
+    app.get("/api/workout/range", (req, res) => {
         db.Workout.find({})
         .then(workout => {
             res.json(workout);

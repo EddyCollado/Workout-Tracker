@@ -1,10 +1,13 @@
 let mongoose = require("mongoose");
 let db = require("../models");
 
-mongoose.connect("mongodb://localhost/workout", {
-  useNewUrlParser: true,
-  useFindAndModify: false
-});
+mongoose 
+  .connect(
+      process.env.MONGODB_URI || "mongodb://localhost/workout",
+      { useNewUrlParse: true }
+  )
+  .then(() => console.log("MongoDB successfully connected"))
+  .catch(err => console.log(err));
 
 let workoutSeed = [
   {

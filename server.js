@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParse: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://phat_orbs:password1234@ds251877.mlab.com:51877/heroku_pj89xw0p", { useNewUrlParser: true });
 
 const db = require("./models");
 
